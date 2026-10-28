@@ -165,6 +165,9 @@ def build(out=None, base=None):
     write('social-card.svg','<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#24342b"/><text x="90" y="160" fill="#b7dc8b" font-family="monospace" font-size="28">GDOG / ENGINEERING NOTES</text><text x="90" y="310" fill="#f5f4ee" font-family="sans-serif" font-size="65">把问题拆小，</text><text x="90" y="405" fill="#f5f4ee" font-family="sans-serif" font-size="65">把方法留下来。</text><text x="90" y="535" fill="#b7c6b8" font-family="sans-serif" font-size="26">Git · Web · 命令行 · 浏览器工具</text></svg>')
     for asset in ['site.css','site.js','social-card.jpg']:shutil.copyfile(ROOT/asset,dest/asset)
     write('.nojekyll','')
+    verification = (ROOT/'indexnow-key.txt').read_text().strip()
+    if not re.fullmatch(r'[a-zA-Z0-9-]{8,128}', verification): raise ValueError('Invalid IndexNow verification identifier')
+    write(verification+'.txt',verification+'\n')
     write('robots.txt',f'User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n')
     sitemap=Element('urlset',xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
     for path in paths:
