@@ -40,3 +40,20 @@ jobs:
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
+  notify-search:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Notify search engines of changed URLs
+        env:
+          PREVIOUS_SHA: ${{ github.event.before }}
+        run: python3 indexnow.py
