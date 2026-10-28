@@ -1,0 +1,22 @@
+name: 内容纠错 / 工具问题
+description: 帮助我们把问题讲清楚、修准确。
+title: '[反馈] '
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 相关页面或工具
+      placeholder: 文章地址、标题或工具名称
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题、预期与复现步骤
+      description: 请移除密码、令牌和个人信息。
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: 参考来源或建议
