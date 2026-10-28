@@ -2,7 +2,9 @@
 
 把日常开发里的小问题，写成能照着做的笔记。
 
-[阅读网站](https://testgeigei.github.io/engineering-notes/) · [工具箱](https://testgeigei.github.io/engineering-notes/tools/) · [RSS 订阅](https://testgeigei.github.io/engineering-notes/feed.xml) · [纠错与选题](https://github.com/testgeigei/engineering-notes/issues)
+[阅读网站](https://testgeigei.github.io/engineering-notes/) · [工具箱](https://testgeigei.github.io/engineering-notes/tools/) · [RSS 订阅](https://testgeigei.github.io/engineering-notes/feed.xml) · [Wiki 指南](https://github.com/testgeigei/engineering-notes/wiki) · [讨论与选题](https://github.com/testgeigei/engineering-notes/discussions) · [纠错](https://github.com/testgeigei/engineering-notes/issues)
+
+[![自动发布检查](https://github.com/testgeigei/engineering-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/testgeigei/engineering-notes/actions/workflows/pages.yml)
 
 ## 从一个问题开始
 
@@ -19,6 +21,10 @@
 ## 打开就能用
 
 [浏览器工具箱](https://testgeigei.github.io/engineering-notes/tools/) 提供 JSON 格式化与检查、Unix 时间戳转换、URL 参数拆解、SHA-256 文本摘要。输入只在浏览器处理，无需注册，无第三方脚本。
+
+## 使用指南与路线图
+
+[Wiki](https://github.com/testgeigei/engineering-notes/wiki) 包含阅读路线、四个工具的使用说明与常见问题。[公开路线图](https://github.com/testgeigei/engineering-notes/wiki/Roadmap) 标明已提供的功能和后续方向，选题建议可以在讨论区提出。
 
 ## 订阅与参与
 

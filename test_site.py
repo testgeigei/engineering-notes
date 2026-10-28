@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import re
 import tempfile
 import unittest
 from html.parser import HTMLParser
@@ -19,6 +20,18 @@ class Links(HTMLParser):
             if key in ('href','src'):self.links.append(value)
 
 class PublishingTests(unittest.TestCase):
+    def test_sharing_metadata_and_breadcrumbs(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=site.build(td)
+            self.assertEqual((root/'social-card.jpg').read_bytes()[:3],b'\xff\xd8\xff')
+            a=site.load()[0]
+            doc=(root/'notes'/a['id']/'index.html').read_text()
+            data=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',doc).group(1))
+            self.assertEqual(data[0]['@type'],'TechArticle')
+            self.assertEqual(data[1]['itemListElement'][-1]['item'],data[0]['mainEntityOfPage'])
+            self.assertIn('summary_large_image',doc)
+            self.assertIn('data-share',doc)
+            self.assertIn('/wiki',doc)
     def test_sources_and_ids(self):self.assertGreaterEqual(len(site.load()),10)
     def test_reject_duplicate(self):
         articles=site.load();articles.append(copy.deepcopy(articles[0]))
