@@ -2,7 +2,7 @@
 
 把日常开发里的小问题，写成能照着做的笔记。
 
-[阅读网站](https://testgeigei.github.io/engineering-notes/) · [工具箱](https://testgeigei.github.io/engineering-notes/tools/) · [RSS 订阅](https://testgeigei.github.io/engineering-notes/feed.xml) · [Wiki 指南](https://github.com/testgeigei/engineering-notes/wiki) · [讨论与选题](https://github.com/testgeigei/engineering-notes/discussions) · [纠错](https://github.com/testgeigei/engineering-notes/issues)
+[阅读网站](https://testgeigei.github.io/engineering-notes/) · [工具箱](https://testgeigei.github.io/engineering-notes/tools/) · [专题路线](https://testgeigei.github.io/engineering-notes/topics/) · [订阅指南](https://testgeigei.github.io/engineering-notes/subscribe/) · [RSS 订阅](https://testgeigei.github.io/engineering-notes/feed.xml) · [Wiki 指南](https://github.com/testgeigei/engineering-notes/wiki) · [讨论与选题](https://github.com/testgeigei/engineering-notes/discussions) · [纠错](https://github.com/testgeigei/engineering-notes/issues)
 
 [![自动发布检查](https://github.com/testgeigei/engineering-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/testgeigei/engineering-notes/actions/workflows/pages.yml)
 
