@@ -13,6 +13,12 @@ class DiscoveryTests(unittest.TestCase):
         for slug in ['old','new','kept']:
             self.assertIn(indexnow.BASE+'/notes/'+slug+'/',urls)
         self.assertNotIn(indexnow.BASE+'/tools/',urls)
+    def test_category_move_notifies_old_and_new_routes(self):
+        old=[{'id':'kept','category':'Git 与协作'}]
+        new=[{'id':'kept','category':'Web 基础'}]
+        urls=indexnow.changed_urls(new,old)
+        for route in ['topics/git/','topics/web/','archive/','topics/']:
+            self.assertIn(indexnow.BASE+'/'+route,urls)
     def test_verification_scope(self):
         with self.assertRaises(ValueError):
             indexnow.payload(['https://example.com/'],'a'*32)

@@ -8,9 +8,10 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
+from topics import topic_slug
 
 ROOT = Path(__file__).resolve().parent
-BASE = 'https://testgeigei.github.io/engineering-notes'
+BASE = 'https://gdog.tomtojapan.online'
 ENDPOINT = 'https://api.indexnow.org/indexnow'
 
 def previous_file(revision, name):
@@ -28,9 +29,11 @@ def changed_urls(current, previous=None, site_changed=False, resources_changed=F
     }
     urls = {f'{BASE}/notes/{key}/' for key in changed}
     if changed or site_changed or previous is None:
-        urls.update([BASE+'/', BASE+'/notes/'])
+        urls.update([BASE+'/', BASE+'/notes/', BASE+'/archive/', BASE+'/topics/'])
+        affected = current + (previous or []) if site_changed or previous is None else [a for a in current + (previous or []) if a['id'] in changed]
+        urls.update(BASE+'/topics/'+topic_slug(a['category'])+'/' for a in affected if a.get('category'))
     if site_changed or previous is None:
-        urls.update(BASE+'/'+path+'/' for path in ['tools', 'resources', 'about'])
+        urls.update(BASE+'/'+path+'/' for path in ['tools', 'resources', 'about', 'subscribe'])
     elif resources_changed:
         urls.add(BASE+'/resources/')
     return sorted(urls)
@@ -53,7 +56,7 @@ def main(dry_run=False):
     # Introduction of this integration requires the initial site submission.
     first_run = previous_file(revision, 'indexnow.py') is None
     site_changed = first_run or any(previous_file(revision, name) != (ROOT/name).read_bytes()
-                                   for name in ['site.py', 'site.css', 'site.js', 'social-card.jpg'])
+                                   for name in ['site.py', 'site.css', 'site.js', 'social-card.jpg', 'topics.py'])
     resources_changed = previous_file(revision, 'resources.json') != (ROOT/'resources.json').read_bytes()
     urls = changed_urls(current, previous, site_changed, resources_changed)
     if not urls:

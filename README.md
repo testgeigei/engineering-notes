@@ -2,7 +2,7 @@
 
 把日常开发里的小问题，写成能照着做的笔记。
 
-[阅读网站](https://testgeigei.github.io/engineering-notes/) · [工具箱](https://testgeigei.github.io/engineering-notes/tools/) · [RSS 订阅](https://testgeigei.github.io/engineering-notes/feed.xml) · [Wiki 指南](https://github.com/testgeigei/engineering-notes/wiki) · [讨论与选题](https://github.com/testgeigei/engineering-notes/discussions) · [纠错](https://github.com/testgeigei/engineering-notes/issues)
+[阅读网站](https://gdog.tomtojapan.online/) · [工具箱](https://gdog.tomtojapan.online/tools/) · [专题路线](https://gdog.tomtojapan.online/topics/) · [订阅指南](https://gdog.tomtojapan.online/subscribe/) · [RSS 订阅](https://gdog.tomtojapan.online/feed.xml) · [Wiki 指南](https://github.com/testgeigei/engineering-notes/wiki) · [讨论与选题](https://github.com/testgeigei/engineering-notes/discussions) · [纠错](https://github.com/testgeigei/engineering-notes/issues)
 
 [![自动发布检查](https://github.com/testgeigei/engineering-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/testgeigei/engineering-notes/actions/workflows/pages.yml)
 
@@ -10,17 +10,17 @@
 
 | 你遇到的问题 | 对应笔记 |
 | --- | --- |
-| Git 改错了，怎么撤回？ | [先分清工作区、暂存区和提交](https://testgeigei.github.io/engineering-notes/notes/git-undo-without-panic/) |
-| 已经推送的提交怎么回退？ | [用 revert 保留协作历史](https://testgeigei.github.io/engineering-notes/notes/git-revert-shared-history/) |
-| 浏览器为什么拿到旧内容？ | [HTTP 缓存的两个问题](https://testgeigei.github.io/engineering-notes/notes/http-cache-two-questions/) |
-| Python 依赖互相冲突？ | [给项目建立虚拟环境](https://testgeigei.github.io/engineering-notes/notes/python-venv-project-boundaries/) |
-| SQL 查询慢，从哪里看？ | [从 SQLite 查询计划开始](https://testgeigei.github.io/engineering-notes/notes/sqlite-query-plan-first-step/) |
+| Git 改错了，怎么撤回？ | [先分清工作区、暂存区和提交](https://gdog.tomtojapan.online/notes/git-undo-without-panic/) |
+| 已经推送的提交怎么回退？ | [用 revert 保留协作历史](https://gdog.tomtojapan.online/notes/git-revert-shared-history/) |
+| 浏览器为什么拿到旧内容？ | [HTTP 缓存的两个问题](https://gdog.tomtojapan.online/notes/http-cache-two-questions/) |
+| Python 依赖互相冲突？ | [给项目建立虚拟环境](https://gdog.tomtojapan.online/notes/python-venv-project-boundaries/) |
+| SQL 查询慢，从哪里看？ | [从 SQLite 查询计划开始](https://gdog.tomtojapan.online/notes/sqlite-query-plan-first-step/) |
 
 完整目录包括 Git、HTTP、Python、JSON、URL、SQLite 和排错方法。每篇提供场景、示例和一手文档链接。
 
 ## 打开就能用
 
-[浏览器工具箱](https://testgeigei.github.io/engineering-notes/tools/) 提供 JSON 格式化与检查、Unix 时间戳转换、URL 参数拆解、SHA-256 文本摘要。输入只在浏览器处理，无需注册，无第三方脚本。
+[浏览器工具箱](https://gdog.tomtojapan.online/tools/) 提供 JSON 格式化与检查、Unix 时间戳转换、URL 参数拆解、SHA-256 文本摘要。输入只在浏览器处理，无需注册，无第三方脚本。
 
 ## 使用指南与路线图
 

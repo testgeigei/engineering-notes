@@ -32,6 +32,21 @@ class PublishingTests(unittest.TestCase):
             self.assertIn('summary_large_image',doc)
             self.assertIn('data-share',doc)
             self.assertIn('/wiki',doc)
+    def test_topic_subscription_and_archive_coverage(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=site.build(td)
+            sitemap=ElementTree.parse(root/'sitemap.xml')
+            urls={item.text for item in sitemap.findall('.//{*}loc')}
+            for route in ['topics','archive','subscribe']:
+                self.assertIn(site.BASE+'/'+route+'/',urls)
+            for article in site.load():
+                path=root/'topics'/site.topic_slug(article['category'])/'index.html'
+                self.assertIn('/notes/'+article['id']+'/',path.read_text())
+                self.assertIn(site.BASE+'/topics/'+site.topic_slug(article['category'])+'/',urls)
+            self.assertNotIn(site.BASE+'/404.html',urls)
+    def test_future_revision_date_rejected(self):
+        articles=site.load();articles[0]['updated']='2999-01-01'
+        with self.assertRaises(ValueError):site.validate(articles)
     def test_sources_and_ids(self):self.assertGreaterEqual(len(site.load()),10)
     def test_reject_duplicate(self):
         articles=site.load();articles.append(copy.deepcopy(articles[0]))
@@ -51,7 +66,10 @@ class PublishingTests(unittest.TestCase):
             root=site.build(td)
             for file in root.rglob('*.html'):
                 doc=file.read_text();parser=Links();parser.feed(doc)
-                self.assertEqual(parser.h1,1,str(file));self.assertIn('rel="canonical"',doc)
+                self.assertEqual(parser.h1,1,str(file))
+                if file.name=='404.html':
+                    self.assertIn('noindex,follow',doc);self.assertNotIn('rel="canonical"',doc)
+                else:self.assertIn('rel="canonical"',doc)
                 for link in parser.links:
                     parsed=urlparse(link)
                     if parsed.scheme or parsed.netloc or not parsed.path:continue
