@@ -1,0 +1,74 @@
+[
+  {
+    "category": "版本控制",
+    "title": "Git 官方参考",
+    "url": "https://git-scm.com/docs",
+    "description": "按命令查参数、默认行为和边界，适合核对会改变历史或文件的操作。"
+  },
+  {
+    "category": "版本控制",
+    "title": "GitHub 文档",
+    "url": "https://docs.github.com/",
+    "description": "仓库、协作、Pages 与 Actions 的官方使用入口。"
+  },
+  {
+    "category": "Web 开发",
+    "title": "MDN Web Docs",
+    "url": "https://developer.mozilla.org/zh-CN/",
+    "description": "HTML、CSS、JavaScript 和浏览器 API 的系统参考。"
+  },
+  {
+    "category": "Web 开发",
+    "title": "web.dev",
+    "url": "https://web.dev/learn",
+    "description": "学习性能、无障碍和现代 Web 的结构化课程。"
+  },
+  {
+    "category": "语言与运行时",
+    "title": "Python 标准库",
+    "url": "https://docs.python.org/3/library/",
+    "description": "先找标准库是否已经能解决问题，减少不必要的依赖。"
+  },
+  {
+    "category": "语言与运行时",
+    "title": "Node.js 文档",
+    "url": "https://nodejs.org/api/",
+    "description": "查清文件、流、进程与运行时接口的行为。"
+  },
+  {
+    "category": "数据与配置",
+    "title": "SQLite 文档",
+    "url": "https://www.sqlite.org/docs.html",
+    "description": "轻量数据库的 SQL、事务、限制与诊断说明。"
+  },
+  {
+    "category": "数据与配置",
+    "title": "PostgreSQL 文档",
+    "url": "https://www.postgresql.org/docs/",
+    "description": "查询、索引、事务与运维的官方参考。"
+  },
+  {
+    "category": "工程方法",
+    "title": "Google 技术写作课程",
+    "url": "https://developers.google.com/tech-writing",
+    "description": "学习怎样把技术步骤写得清楚，让读者完成实际任务。"
+  },
+  {
+    "category": "工程方法",
+    "title": "Keep a Changelog",
+    "url": "https://keepachangelog.com/zh-CN/1.1.0/",
+    "description": "面向使用者组织变更记录，而不是直接粘贴提交日志。"
+  },
+  {
+    "category": "工程方法",
+    "title": "Semantic Versioning",
+    "url": "https://semver.org/lang/zh-CN/",
+    "description": "理解兼容性与版本号之间的约定。"
+  },
+  {
+    "category": "Web 开发",
+    "title": "W3C 无障碍教程",
+    "url": "https://www.w3.org/WAI/tutorials/",
+    "description": "表单、图片和页面结构的无障碍设计示例。"
+  }
+]
