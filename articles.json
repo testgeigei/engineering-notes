@@ -148,5 +148,24 @@
         "url": "https://stackoverflow.com/help/minimal-reproducible-example"
       }
     ]
+  },
+  {
+    "id": "python-subprocess-command-contract",
+    "title": "Python 调用外部命令：把参数、失败和超时说清楚",
+    "summary": "用 subprocess.run 建立一个小而明确的命令调用：参数不靠拼接，失败不当成功，等待有时间边界。",
+    "category": "命令行与脚本",
+    "date": "2026-10-29",
+    "updated": "2026-10-29",
+    "body": "脚本需要调用另一个程序时，最先要约定的不是命令写在哪一行，而是三件事：每个参数是什么、失败怎样传回来、最多愿意等多久。把这些条件写在调用处，后面的排错就有了起点。\n\n## 先把命令拆成参数列表\n\n下面的例子只调用当前 Python 解释器，不依赖额外工具。把代码存成 run_command.py，再用 Python 运行。带空格的文件名只是演示参数，并不要求文件真的存在。\n\n```python\nimport subprocess\nimport sys\n\nresult = subprocess.run(\n    [sys.executable, \"-c\", \"import sys; print(sys.argv[1])\",\n     \"report 2026.json\"],\n    check=True,\n    capture_output=True,\n    text=True,\n    encoding=\"utf-8\",\n    timeout=5,\n)\nprint(result.stdout.strip())\n```\n\n输出是一整行 report 2026.json。列表的最后一项是一个完整参数，不需要再给空格补引号。shell 默认关闭；这里没有管道、重定向或通配符展开。如果后续要换成其他程序，先保留这种参数结构，再替换可执行文件和选项。\n\n## 把命令失败变成明确分支\n\n命令运行结束，不代表任务成功。check=True 会让非零退出码进入异常分支；已经捕获的标准错误可以用来解释原因。下面用退出码 3 模拟失败。\n\n```python\nimport subprocess\nimport sys\n\ntry:\n    subprocess.run(\n        [sys.executable, \"-c\",\n         \"import sys; print('invalid input', file=sys.stderr); sys.exit(3)\"],\n        check=True, capture_output=True, text=True, encoding=\"utf-8\",\n        timeout=5,\n    )\nexcept subprocess.CalledProcessError as error:\n    print(\"exit:\", error.returncode)\n    print(\"stderr:\", error.stderr.strip())\n```\n\n可以看到 exit: 3 和 stderr: invalid input。实际业务可以据此停止当前步骤，或把经过整理的原因交给调用者；不要捕获异常之后继续报告“处理完成”。\n\n## 给等待设置边界\n\n长时间没有输出，既可能是计算中，也可能是卡住了。用下面的独立例子观察超时分支：\n\n```python\nimport subprocess\nimport sys\n\ntry:\n    subprocess.run(\n        [sys.executable, \"-c\", \"import time; time.sleep(2)\"],\n        check=True, timeout=0.1,\n    )\nexcept subprocess.TimeoutExpired:\n    print(\"command timed out\")\n```\n\n预期输出 command timed out。这里很短的时间只用于演示；生产任务应按正常耗时选择阈值。timeout 也不是整个工作流的精确总时限，启动进程本身等环节需要另作考虑。\n\n## 区分“启动不了”和“启动后失败”\n\nCalledProcessError 表示程序启动后以非零状态退出；找不到可执行文件等启动问题属于另一类错误，可能抛出 OSError 的子类。排查时分别确认程序路径、工作目录、退出码和标准错误，别把所有情况压成同一句“命令错误”。\n\n对于能持续输出大量内容的程序，也不要默认把所有输出存进内存。可以将输出写入受控文件；只有确实需要边运行边处理时，再考虑更细的进程接口。\n\n## 留下能复用的调用约定\n\n把这三个演示跑通后，再接入真实命令：固定参数结构，声明失败分支，设置合理超时，并决定哪些输出值得保留。参数列表解决的是调用边界；目标程序自己的参数含义仍要查它的文档，输入也仍需按业务要求校验。",
+    "sources": [
+      {
+        "title": "Python 官方文档：subprocess.run 与参数、返回值",
+        "url": "https://docs.python.org/3.11/library/subprocess.html#subprocess.run"
+      },
+      {
+        "title": "Python 官方文档：异常与安全注意事项",
+        "url": "https://docs.python.org/3.11/library/subprocess.html#security-considerations"
+      }
+    ]
   }
 ]
