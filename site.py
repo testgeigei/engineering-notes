@@ -18,7 +18,7 @@ from topics import topic_slug, topic_description
 from xml.etree.ElementTree import Element, SubElement, tostring
 
 ROOT = Path(__file__).resolve().parent
-BASE = 'https://gdog.tomtojapan.online'
+BASE = 'https://testgeigei.github.io/engineering-notes'
 REPO = 'https://github.com/testgeigei/engineering-notes'
 NAME = 'GDOG 工程手记'
 DESCRIPTION = '把日常开发里的小问题，写成能照着做的笔记。Git、命令行、Web 基础与轻量工具。'

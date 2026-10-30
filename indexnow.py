@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 from topics import topic_slug
 
 ROOT = Path(__file__).resolve().parent
-BASE = 'https://gdog.tomtojapan.online'
+BASE = 'https://testgeigei.github.io/engineering-notes'
 ENDPOINT = 'https://api.indexnow.org/indexnow'
 
 def previous_file(revision, name):

@@ -44,6 +44,18 @@ class PublishingTests(unittest.TestCase):
                 self.assertIn('/notes/'+article['id']+'/',path.read_text())
                 self.assertIn(site.BASE+'/topics/'+site.topic_slug(article['category'])+'/',urls)
             self.assertNotIn(site.BASE+'/404.html',urls)
+    def test_public_urls_use_pages_subtree_not_operator_proxy(self):
+        self.assertEqual(site.BASE, 'https://testgeigei.github.io/engineering-notes')
+        with tempfile.TemporaryDirectory() as td:
+            root=site.build(td)
+            for name in ['index.html', 'notes/index.html', 'feed.xml', 'sitemap.xml', 'subscribe/index.html']:
+                text=(root/name).read_text()
+                self.assertNotIn('gdog.tomtojapan.online',text)
+            self.assertIn('href="'+site.BASE+'/"', (root/'index.html').read_text())
+            urls=[n.text for n in ElementTree.parse(root/'sitemap.xml').findall('.//{*}loc')]
+            self.assertTrue(all(url.startswith(site.BASE+'/') for url in urls))
+            self.assertIn('content="'+site.BASE+'/social-card.jpg"',(root/'index.html').read_text())
+
     def test_future_revision_date_rejected(self):
         articles=site.load();articles[0]['updated']='2999-01-01'
         with self.assertRaises(ValueError):site.validate(articles)
