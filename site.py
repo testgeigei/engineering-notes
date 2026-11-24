@@ -184,7 +184,7 @@ def build(out=None, base=None):
     write('about/index.html',layout('关于与编辑说明',about,'about',active='关于'))
     write('404.html',layout('没有找到这页','<div class="page-head"><div class="eyebrow">404 / PAGE NOT FOUND</div><h1>这一页没有找到。</h1><p>地址可能改变了，试试从笔记目录重新查找。</p><a class="button" href="'+BASE+'/notes/">浏览全部笔记</a></div>', absolute=True,noindex=True))
     write('favicon.svg','<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#24342b"/><text x="13" y="45" font-size="42" font-family="monospace" fill="#f5f4ee">g.</text></svg>')
-    write('social-card.svg','<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#24342b"/><text x="90" y="160" fill="#b7dc8b" font-family="monospace" font-size="28">ENGINEERING NOTES</text><text x="90" y="310" fill="#f5f4ee" font-family="sans-serif" font-size="65">把问题拆小，</text><text x="90" y="405" fill="#f5f4ee" font-family="sans-serif" font-size="65">把方法留下来。</text><text x="90" y="535" fill="#b7c6b8" font-family="sans-serif" font-size="26">Git · Web · 命令行 · 浏览器工具</text></svg>')
+    write('social-card.svg','<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#24342b"/><text x="90" y="160" fill="#b7dc8b" font-family="monospace" font-size="28">Engineering Notes / ENGINEERING NOTES</text><text x="90" y="310" fill="#f5f4ee" font-family="sans-serif" font-size="65">把问题拆小，</text><text x="90" y="405" fill="#f5f4ee" font-family="sans-serif" font-size="65">把方法留下来。</text><text x="90" y="535" fill="#b7c6b8" font-family="sans-serif" font-size="26">Git · Web · 命令行 · 浏览器工具</text></svg>')
     for asset in ['site.css','site.js','social-card.jpg']:shutil.copyfile(ROOT/asset,dest/asset)
     write('.nojekyll','')
     verification = (ROOT/'indexnow-key.txt').read_text().strip()
@@ -210,7 +210,7 @@ def build(out=None, base=None):
     return dest
 
 def dev(port):
-    dest=build(base='http://127.0.0.1:4186')
+    dest=build(base='http://engineering-notes.loc')
     handler=lambda *a,**kw:http.server.SimpleHTTPRequestHandler(*a,directory=str(dest),**kw)
     server=http.server.ThreadingHTTPServer(('127.0.0.1',port),handler)
     def watch():
@@ -218,11 +218,11 @@ def dev(port):
         while True:
             signature=tuple((ROOT/name).stat().st_mtime_ns for name in ['articles.json','resources.json','site.py','site.css','site.js','topics.py'])
             if previous and signature!=previous:
-                try:subprocess.run([sys.executable,str(ROOT/'site.py'),'build','--base','http://127.0.0.1:4186'],check=True)
+                try:subprocess.run([sys.executable,str(ROOT/'site.py'),'build','--base','http://engineering-notes.loc'],check=True)
                 except Exception as e:print(f'Rebuild rejected: {e}')
             previous=signature;time.sleep(1)
     threading.Thread(target=watch,daemon=True).start()
-    print(f'Dev listening on 127.0.0.1:{port}; fixed entrance http://127.0.0.1:4186',flush=True)
+    print(f'Dev listening on 127.0.0.1:{port}; fixed entrance http://engineering-notes.loc',flush=True)
     server.serve_forever()
 
 if __name__=='__main__':

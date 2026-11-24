@@ -68,7 +68,7 @@ def main(dry_run=False):
         return
     request = urllib.request.Request(ENDPOINT, data=json.dumps(data).encode(),
                                     headers={'Content-Type': 'application/json; charset=utf-8',
-                                             'User-Agent': 'EngineeringNotes-IndexNow/1.0'}, method='POST')
+                                             'User-Agent': 'Engineering Notes-IndexNow/1.0'}, method='POST')
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             status = response.status

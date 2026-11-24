@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse, unquote
 from xml.etree import ElementTree
 
-spec=importlib.util.spec_from_file_location('engineering_notes_site',Path(__file__).with_name('site.py'))
+spec=importlib.util.spec_from_file_location('engineering-notes_site',Path(__file__).with_name('site.py'))
 site=importlib.util.module_from_spec(spec);spec.loader.exec_module(site)
 
 class Links(HTMLParser):
@@ -50,7 +50,7 @@ class PublishingTests(unittest.TestCase):
             root=site.build(td)
             for name in ['index.html', 'notes/index.html', 'feed.xml', 'sitemap.xml', 'subscribe/index.html']:
                 text=(root/name).read_text()
-                self.assertNotIn('internal.example.invalid',text)
+                self.assertNotIn('engineering-notes.tomtojapan.online',text)
             self.assertIn('href="'+site.BASE+'/"', (root/'index.html').read_text())
             urls=[n.text for n in ElementTree.parse(root/'sitemap.xml').findall('.//{*}loc')]
             self.assertTrue(all(url.startswith(site.BASE+'/') for url in urls))
